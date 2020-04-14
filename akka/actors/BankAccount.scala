@@ -2,6 +2,7 @@ package com.samples
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import com.samples.BankAccount.BankAccount.{Deposit, Failure, PrintStatement, Success, Withdraw}
+import com.samples.BankAccount.Customer.DoTransaction
 
 object BankAccount extends App{
 
@@ -63,7 +64,6 @@ object BankAccount extends App{
   val bankAccount = actorSystem.actorOf(Props[BankAccount], "bankAccount")
   val customer = actorSystem.actorOf(Props[Customer], "customer")
 
-  case class DoTransaction(fromBank: ActorRef)
   //ask customer to perform some bank transactions
   customer ! DoTransaction(bankAccount)
 
